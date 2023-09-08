@@ -44,11 +44,11 @@ if prompt := st.chat_input():
 audio = audiorecorder("Click to record", "Recording...")
 if len(audio) > 0:
     # To play audio in frontend:
-    st.audio(audio.tobytes())
+    st.audio(audio.export().read())
     
     # To save audio to a file:
     wav_file = open("audio.mp3", "wb")
-    wav_file.write(audio.tobytes())
+    wav_file.write(audio.export().read())
 
     result = model_audio.transcribe("audio.mp3")
     prompt=result["text"]
